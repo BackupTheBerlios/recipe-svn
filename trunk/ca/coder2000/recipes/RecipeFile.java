@@ -125,7 +125,7 @@ public class RecipeFile {
      * @return The list of ingredients in the recipe.
      */    
     public ArrayList getIngredients() {
-        ArrayList list = new ArrayList();
+        ArrayList<Ingredient> list = new ArrayList<Ingredient>();
         List lst = doc.selectNodes("//Ingredients/Ingredient");
         Iterator i = lst.iterator();
         

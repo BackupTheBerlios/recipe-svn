@@ -38,7 +38,6 @@ public class Recipes {
     public static void main(String[] args) {
         
         try {
-            //UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             UIManager.setLookAndFeel(new TonicLookAndFeel());
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
         } catch(Exception e) {   
@@ -56,8 +55,5 @@ public class Recipes {
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);            
         }
-                
-        //java.net.URL imgURL = Recipes.class.getResource("database.png");
-        //frame.setIconImage(new ImageIcon(imgURL).getImage());
     }
 }

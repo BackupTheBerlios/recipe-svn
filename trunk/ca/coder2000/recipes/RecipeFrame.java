@@ -34,12 +34,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import org.dom4j.Document;
-import com.montarasoftware.wwe.WWEEditorPane;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.sql.*;
 
 /**
  * This is the main frame of the application.
@@ -52,14 +48,25 @@ public class RecipeFrame extends JFrame{
      */    
     public JMenuItem menuFileOpen = new JMenuItem();
     /**
+     * Imports a new recipe to the database
+     */
+    public JMenuItem menuFileImport = new JMenuItem();
+    /**
      * the file>exit menu item. public cause it is needed by the listener.
      */    
     public JMenuItem menuFileExit = new JMenuItem();
+    /**
+     * displays the about window of the application.
+     */
     public JMenuItem menuHelpAbout = new JMenuItem();
     
     private InfoPanel info;
     private IngredientsPanel ingpanel;
-    private WWEEditorPane output;
+    
+    /**
+     * the database connection used by the application
+     */
+    public Connection conn;
     
     /** Creates a new instance of RecipeFrame */
     public RecipeFrame() {
@@ -69,10 +76,13 @@ public class RecipeFrame extends JFrame{
         
         menuFile.setText(java.util.ResourceBundle.getBundle("recipe").getString("File"));
         menuFileOpen.setText(java.util.ResourceBundle.getBundle("recipe").getString("Open"));
+        menuFileImport.setText("Import");
         menuFileExit.setText(java.util.ResourceBundle.getBundle("recipe").getString("Exit"));
         
         menuFileOpen.addActionListener(new RecipeMenuListener(this));
         menuFile.add(menuFileOpen);
+        
+        menuFile.add(menuFileImport);
         
         menuFileExit.addActionListener(new RecipeMenuListener(this));
         menuFile.add(menuFileExit);
@@ -88,10 +98,7 @@ public class RecipeFrame extends JFrame{
         setJMenuBar(menuBar);
         setSize(new Dimension(400, 400));
         
-        output = new WWEEditorPane(true);
-        output.setContentType("text/html");
-        
-        JScrollPane ing = new JScrollPane(output);
+        JScrollPane ing = new JScrollPane();
         this.getContentPane().add(ing, BorderLayout.CENTER);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,17 +107,9 @@ public class RecipeFrame extends JFrame{
     
     /**
      * displays the recipe.  is called from the event handler.
-     * @param file the file containing the recipe to be displayed.
+     * @param fldRecId Id from the database of the recipe to display.
      */    
-    public void displayRecipe(RecipeFile file) {
-        Document html;
-        // Hard coded path MUST remove.
-        html = file.getHTML(new File("k:/recipe/schemas/genhtml.xslt"));
-        try {
-            // Hard coded path MUST remove.
-            output.read(new FileInputStream("k:/recipe/recipe.tmp"), html);
-        } catch (FileNotFoundException fnfe) {
-            JOptionPane.showMessageDialog(null, fnfe.getMessage());
-        } catch (IOException ioe) {}
+    public void displayRecipe(int fldRecId) {
+        
     }
 }

@@ -48,17 +48,9 @@ public class RecipeMenuListener implements ActionListener {
         if (actionEvent.getSource().equals(frame.menuFileExit)) {
             System.exit(0);
         } else if (actionEvent.getSource().equals(frame.menuFileOpen)) {
-            fc.addChoosableFileFilter(new RecipeFilter());
             
-            int returnVal = fc.showOpenDialog(frame);
-            
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                RecipeFile r = new RecipeFile(fc.getSelectedFile());
-                if (r.valid)
-                    frame.displayRecipe(r);
-            }
         } else if (actionEvent.getSource().equals(frame.menuHelpAbout)) {
-            ArrayList devs = new ArrayList();
+            ArrayList<String> devs = new ArrayList<String>();
             devs.add("Dieter Lunn");
             devs.add("Michael Scholz");
             devs.add("Patrik Johansson");
