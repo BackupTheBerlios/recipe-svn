@@ -35,10 +35,10 @@ import java.sql.Statement;
  * @author Dieter Lunn
  */
 public class RunOnce extends JFrame implements Runnable {
-    Thread sqlThread = null;
-    JLabel status = new JLabel();
-    JProgressBar progress = new JProgressBar();
-    JFrame parent;
+    private Thread sqlThread = null;
+    private JLabel status = new JLabel();
+    private JProgressBar progress = new JProgressBar();
+    private JFrame parent;
     
     /**
      * Creates a new instance of RunOnce

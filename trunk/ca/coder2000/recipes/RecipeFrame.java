@@ -70,6 +70,12 @@ public class RecipeFrame extends JFrame{
     
     /** Creates a new instance of RecipeFrame */
     public RecipeFrame() {
+        try {
+            conn = DriverManager.getConnection("jdbc:derby:data/recipes");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         JMenuBar menuBar = new JMenuBar();
         JMenu menuFile = new JMenu();
         JMenu menuHelp = new JMenu();

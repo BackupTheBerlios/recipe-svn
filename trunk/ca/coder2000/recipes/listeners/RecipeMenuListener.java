@@ -28,6 +28,7 @@ import javax.swing.JFileChooser;
 import ca.coder2000.recipes.RecipeFrame;
 import ca.coder2000.recipes.filters.RecipeFilter;
 import ca.coder2000.recipes.RecipeFile;
+import ca.coder2000.recipes.RecipeOpen;
 import ca.coder2000.common.AboutDialog;
 
 /**
@@ -48,7 +49,8 @@ public class RecipeMenuListener implements ActionListener {
         if (actionEvent.getSource().equals(frame.menuFileExit)) {
             System.exit(0);
         } else if (actionEvent.getSource().equals(frame.menuFileOpen)) {
-            
+            RecipeOpen open = new RecipeOpen(frame.conn);
+            open.showRecipeOpen();
         } else if (actionEvent.getSource().equals(frame.menuHelpAbout)) {
             ArrayList<String> devs = new ArrayList<String>();
             devs.add("Dieter Lunn");
