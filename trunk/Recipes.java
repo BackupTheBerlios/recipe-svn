@@ -18,9 +18,14 @@
  */
 
 import ca.coder2000.recipes.RecipeFrame;
+import ca.coder2000.recipes.RunOnce;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
+import java.io.File;
 import com.digitprop.tonic.TonicLookAndFeel;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  *
@@ -35,16 +40,24 @@ public class Recipes {
         try {
             //UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             UIManager.setLookAndFeel(new TonicLookAndFeel());
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
         } catch(Exception e) {   
         }
         
         RecipeFrame frame = new RecipeFrame();
-        
+
         frame.setDefaultLookAndFeelDecorated(true);
-        java.net.URL imgURL = Recipes.class.getResource("database.png");
-        frame.setIconImage(new ImageIcon(imgURL).getImage());
-        
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+
+        File runOnce = new File("data\\runonce.dat");
+        if (!runOnce.exists()) {
+            RunOnce once = new RunOnce(frame);
+            once.go();
+        } else {
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);            
+        }
+                
+        //java.net.URL imgURL = Recipes.class.getResource("database.png");
+        //frame.setIconImage(new ImageIcon(imgURL).getImage());
     }
 }
